@@ -17,7 +17,7 @@ class MoleculeList(MoleculeListABC):
         return self._data[i]
 
     def __setitem__(self, i, molecule):
-        # TODO Муторно. переделать
+        # переделать
         if isinstance(i, slice):
             # проверка все mol, Mol
             if False not in [isinstance(mol, Molecule) for mol in molecule]:
