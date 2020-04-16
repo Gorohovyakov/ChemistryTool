@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ...algorithms.abc.isomorphism import IsomorphismABC
+from ...algorithms import IsomorphismABC
 
 
 class MoleculeABC(IsomorphismABC, ABC):
