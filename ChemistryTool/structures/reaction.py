@@ -17,7 +17,6 @@ class MoleculeList(MoleculeListABC):
         return self._data[i]
 
     def __setitem__(self, i, molecule):
-<<<<<<< HEAD
         # переделать
         if isinstance(i, slice):
             # проверка все mol, Mol
@@ -27,10 +26,6 @@ class MoleculeList(MoleculeListABC):
             self._data[i] = molecule
         else:
             raise TypeError('Only Molecule acceptable')
-=======
-        pass  # todo: homework!
->>>>>>> master
-
 
 class Reaction(ReactionABC):
     def __init__(self):
@@ -45,14 +40,11 @@ class Reaction(ReactionABC):
     def products(self):
         return self._products
 
-<<<<<<< HEAD
     def __repr__(self):
         return f"({list(self.reactants)}, {list(self.products)})"
 
     def __str__(self):
         return f"Reactants: {list(self.reactants)}\nProducts: {list(self.products)}"
 
-=======
->>>>>>> master
 
 __all__ = ['Reaction']
