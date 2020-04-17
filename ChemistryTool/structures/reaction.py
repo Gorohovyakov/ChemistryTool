@@ -20,7 +20,7 @@ class MoleculeList(MoleculeListABC):
         # переделать
         if isinstance(i, slice):
             # проверка все mol, Mol
-            if False not in [isinstance(mol, Molecule) for mol in molecule]:
+            if all(isinstance(mol, Molecule) for mol in molecule):
                 self._data[i] = molecule
         elif isinstance(molecule, Molecule):
             self._data[i] = molecule
