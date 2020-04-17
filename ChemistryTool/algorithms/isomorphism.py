@@ -8,3 +8,4 @@ class Isomorphism(IsomorphismABC):
 
 
 __all__ = ['Isomorphism']
+
