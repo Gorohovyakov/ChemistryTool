@@ -1,4 +1,3 @@
-from itertools import tee
 from .abc import ReactionABC, MoleculeListABC
 from .molecule import Molecule
 
@@ -18,7 +17,6 @@ class MoleculeList(MoleculeListABC):
         return self._data[i]
 
     def __setitem__(self, i, molecule):
-        test, molecule = tee(molecule, 2)
         pass  # todo: homework!
 
 
