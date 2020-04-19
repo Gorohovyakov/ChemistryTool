@@ -6,7 +6,7 @@ from ...periodictable.element import Element
 
 class MoleculeABC(IsomorphismABC, ABC):
     def __init__(self):
-        self._atoms: Dict[int, str] = {}
+        self._atoms: Dict[int, Element] = {}
         self._bonds: Dict[int, Dict[int, int]] = {}
 
     @abstractmethod
@@ -43,21 +43,16 @@ class MoleculeABC(IsomorphismABC, ABC):
 
     @abstractmethod
     def __enter__(self):
-        # todo: make backup of internal data
         ...
 
     @abstractmethod
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # todo: restore internal data in exception case.
-        self._atoms = self._backup_atoms
-        self._bonds = self._backup_bonds
-        del self._backup_atoms
         ...
 
     @abstractmethod
     def __str__(self):
-        # todo:  brutto formula
         ...
 
 
 __all__ = ['MoleculeABC']
+

@@ -17,7 +17,14 @@ class MoleculeList(MoleculeListABC):
         return self._data[i]
 
     def __setitem__(self, i, molecule):
-        pass  # todo: homework!
+        if isinstance(i, slice):
+            # проверка все mol is Mol
+            if all(isinstance(mol, Molecule) for mol in molecule):
+                self._data[i] = molecule
+        elif isinstance(molecule, Molecule):
+            self._data[i] = molecule
+        else:
+            raise TypeError('Only Molecule acceptable')
 
 
 class Reaction(ReactionABC):
@@ -32,6 +39,12 @@ class Reaction(ReactionABC):
     @property
     def products(self):
         return self._products
+
+    def __repr__(self):
+        return f"({list(self.reactants)}, {list(self.products)})"
+
+    def __str__(self):
+        return f"Reactants: {list(self.reactants)}\nProducts: {list(self.products)}"
 
 
 __all__ = ['Reaction']
