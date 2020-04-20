@@ -1,3 +1,4 @@
+from itertools import tee
 from .abc import ReactionABC, MoleculeListABC
 from .molecule import Molecule
 
@@ -19,7 +20,8 @@ class MoleculeList(MoleculeListABC):
     def __setitem__(self, i, molecule):
         if isinstance(i, slice):
             # проверка все mol is Mol
-            if all(isinstance(mol, Molecule) for mol in molecule):
+            test, molecule = tee(molecule, 2)
+            if all(isinstance(mol, Molecule) for mol in test):
                 self._data[i] = molecule
         elif isinstance(molecule, Molecule):
             self._data[i] = molecule
