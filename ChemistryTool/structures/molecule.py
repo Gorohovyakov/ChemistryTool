@@ -1,6 +1,6 @@
+from collections import Counter
 from .abc import MoleculeABC
 from ..algorithms import Isomorphism
-from collections import Counter
 from ..periodictable import *
 
 
