@@ -118,7 +118,6 @@ class Molecule(Isomorphism, MoleculeABC):
         del self._backup_atoms
         del self._backup_bonds
 
-
     def __str__(self):
         """
         брутто-формула
