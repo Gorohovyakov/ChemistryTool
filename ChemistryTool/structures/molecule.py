@@ -12,7 +12,7 @@ class Molecule(Isomorphism, MoleculeABC):
         Если атом с таким номером уже есть - ошибка
         """
         if not isinstance(number, int):
-            raise KeyError("Key must be a number")
+            raise TypeError("Key must be a number")
         elif not isinstance(element, Element):
             raise TypeError("Not an atom")
         elif number in self._atoms:
@@ -94,10 +94,10 @@ class Molecule(Isomorphism, MoleculeABC):
         изменение кратности связи
         """
         try:
-            if bond_type == self._bonds[end_atom][start_atom]:
-                return None
-            elif isinstance(bond_type, int):
+            if isinstance(bond_type, int):
                 raise TypeError("Bond type must be an integer")
+            elif bond_type == self._bonds[end_atom][start_atom]:
+                return None
             else:
                 self._bonds[end_atom][start_atom] = self._bonds[start_atom][end_atom] = bond_type
         except KeyError:
@@ -115,12 +115,9 @@ class Molecule(Isomorphism, MoleculeABC):
         if exc_type:
             self._atoms = self._backup_atoms.copy()
             self._bonds = {k: v.copy() for k, v in self._backup_bonds.items()}
-            del self._backup_atoms
-            del self._backup_bonds
-        else:
-            # удаляем backup
-            del self._backup_atoms
-            del self._backup_bonds
+        del self._backup_atoms
+        del self._backup_bonds
+
 
     def __str__(self):
         """

@@ -23,6 +23,8 @@ class MoleculeList(MoleculeListABC):
             test, molecule = tee(molecule, 2)
             if all(isinstance(mol, Molecule) for mol in test):
                 self._data[i] = molecule
+            else:
+                raise TypeError('Only Molecule acceptable')
         elif isinstance(molecule, Molecule):
             self._data[i] = molecule
         else:
