@@ -6,8 +6,9 @@ from ..periodictable import *
 
 class Molecule(Isomorphism, MoleculeABC):
     """Создаем пустой объект Molecule"""
+    __slots__ = ()
 
-    def add_atom(self, element: Element, number: int):
+    def add_atom(self, element: Element, number: int, charge: int = 0):
         """Добавляем атомы и их номер.
         Если атом с таким номером уже есть - ошибка
         """
@@ -20,6 +21,8 @@ class Molecule(Isomorphism, MoleculeABC):
         else:
             self._atoms[number] = element
             self._bonds[number] = {}
+            self._charges[number] = charge
+            element.attach(self, number)
 
     def add_bond(self, start_atom: int, end_atom: int, bond_type: int):
         """Добавляем связь между атомами еще не связанными
@@ -63,6 +66,7 @@ class Molecule(Isomorphism, MoleculeABC):
         """
         try:
             del self._atoms[number]
+            del self._charges[number]
             # удаляем значения по ключу
             for i in self._bonds.pop(number):
                 del self._bonds[i][number]
@@ -79,13 +83,14 @@ class Molecule(Isomorphism, MoleculeABC):
         except KeyError as e:
             raise KeyError("Bond not exist")
 
-    def update_atom(self, element: Element, number: int):
+    def update_atom(self, element: Element, number: int, charge: int = 0):
         """
         Замена атома на другой
         """
         try:
             # isinstance(element, Element)?
             self._atoms[number] = element
+            self._charges[number] = charge
         except KeyError:
             raise KeyError("Index not exist")
 
@@ -109,14 +114,17 @@ class Molecule(Isomorphism, MoleculeABC):
         """
         self._backup_atoms = self._atoms.copy()
         self._backup_bonds = {k: v.copy() for k, v in self._bonds.items()}
+        self._backup_charges = self._charges.copy()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type:
             self._atoms = self._backup_atoms.copy()
             self._bonds = {k: v.copy() for k, v in self._backup_bonds.items()}
+            self._charges = self._backup_charges.copy()
         del self._backup_atoms
         del self._backup_bonds
+        del self._backup_charges
 
     def __str__(self):
         """

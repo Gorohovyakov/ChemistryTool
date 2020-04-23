@@ -2,6 +2,7 @@ from .element import Element
 
 
 class H(Element):
+    __slots__ = ()
     _element = "H"
 
     def __repr__(self):

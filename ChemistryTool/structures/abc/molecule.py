@@ -5,7 +5,7 @@ from ...periodictable.element import Element
 
 
 class MoleculeABC(IsomorphismABC, ABC):
-    __slots__ = ('_atoms', '_bonds', '_charges', '_backup_atoms', '_backup_bonds')
+    __slots__ = ('_atoms', '_bonds', '_charges', '_backup_atoms', '_backup_bonds', '_backup_charges')
 
     def __init__(self):
         self._atoms: Dict[int, Element] = {}
@@ -22,8 +22,7 @@ class MoleculeABC(IsomorphismABC, ABC):
 
     @abstractmethod
     def add_atom(self, element: Element, number: int, charge: int = 0):
-        # todo:  element.attach(self, number)
-        ...
+        element.attach(self, number)
 
     @abstractmethod
     def add_bond(self, start_atom: int, end_atom: int, bond_type: int):
@@ -38,7 +37,7 @@ class MoleculeABC(IsomorphismABC, ABC):
         ...
 
     @abstractmethod
-    def update_atom(self, element: Element, number: int):
+    def update_atom(self, element: Element, number: int, charge: int = 0):
         ...
 
     @abstractmethod
