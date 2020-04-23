@@ -1,10 +1,10 @@
 from collections import Counter
 from .abc import MoleculeABC
-from ..algorithms import Isomorphism
+from ..algorithms import Isomorphism, Components
 from ..periodictable import *
 
 
-class Molecule(Isomorphism, MoleculeABC):
+class Molecule(Isomorphism, Components, MoleculeABC):
     """Создаем пустой объект Molecule"""
     __slots__ = ()
 
