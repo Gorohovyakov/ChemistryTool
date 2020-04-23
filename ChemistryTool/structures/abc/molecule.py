@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Dict
-from ...algorithms.abc import IsomorphismABC, ComponentsABC
+from ...algorithms.abc import IsomorphismABC
 from ...periodictable.element import Element
 
 
-class MoleculeABC(IsomorphismABC, ComponentsABC, ABC):
+class MoleculeABC(IsomorphismABC, ABC):
     __slots__ = ('_atoms', '_bonds', '_charges', '_backup_atoms', '_backup_bonds')
 
     def __init__(self):
